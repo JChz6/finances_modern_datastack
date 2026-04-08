@@ -1,0 +1,21 @@
+
+version: 2
+
+models:
+  - name: stg_transactions
+    description: "Transacciones limpias y casteadas"
+    columns:
+      - name: txn_id
+        description: "Primary key concatenada y hasheada de periodo, cuenta, importe_pen, concepto, descripcion, categoria y subcat"
+        data_tests:
+          - unique
+          - not_null
+
+  - name: fact_transactions
+    description: "Filtro de transacciones solo financieras (excluye Km y Emocional)"
+    columns:
+      - name: txn_id
+        description: "Primary key"
+        data_tests:
+          - unique
+          - not_null

@@ -1,0 +1,7 @@
+sources:
+  - name: finances_raw
+    database: finances_dev
+    schema: fin_bronze
+    tables:
+      - name: raw_transactions
+      

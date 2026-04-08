@@ -1,0 +1,20 @@
+numero,nombre,clave,posicion,descripcion,funcion_pandas,fecha_implementacion
+1,Días trabajados,dias trabajados,derecha,Extrae el número de días trabajados del comentario sobre el registro del salario para calcular el costo en horas de vida,"            mask = (
+                df['comentario']
+                    .astype(str)
+                    .str.replace('í', 'i')
+                    .str.lower()
+                    .str.contains('dias trabajados')
+                )
+
+            df.loc[mask, 'dias_trabajados'] = (
+                df.loc[mask, 'comentario']
+                .str.replace('í', 'i')  # Eliminar acento en 'í'
+                .str.lower()  # Convertir a minúsculas
+                .str.replace('dias trabajados', '', case=False, regex=False)
+                .str.strip()
+                .astype(float)
+                )",2025-04-03
+2,Acompañante,C/,izquierda,"Después de ""C/"" se coloca el nombre del acompañante con quien (o para quien) se realizó ese gasto. Conecta con la tabla de personas, útil para calcular el gasto granular en mujeres. No limitado a mujeres","df[['clave', 'valor']] = df['comentario'].str.extract(r'^\s*([^\s/]+/)\s*(\S+)', expand=True)",2025-05-03
+3,Kilometraje,Km/,izquierda,Después de Km/ vienen los kilómetros parciales en el espacio reseteable del auto en cuestión.,"df[['clave', 'valor']] = df['comentario'].str.extract(r'^\s*([^\s/]+/)\s*(\S+)', expand=True)",2025-06-22
+4,Inmuebles,Inm/,izquierda,"Después de ""Inm/"" se coloca el nombre del inmueble relacionado con el gasto. Indispensable para calcular el gasto total y la rentabilidad de las inversiones inmobiliarias","df[['clave', 'valor']] = df['comentario'].str.extract(r'^\s*([^\s/]+/)\s*(\S+)', expand=True)",2025-08-12
