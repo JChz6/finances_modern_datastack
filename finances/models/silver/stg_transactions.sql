@@ -13,7 +13,7 @@ WITH CTE AS (
     FROM {{source('finances_raw', 'raw_transactions')}}
 
     {% if is_incremental() %}
-        WHERE TO_VARCHAR(segun_un_periodo::DATE, 'YYYYMM')::INTEGER >= (select month_id from {{ this }})
+        WHERE TO_VARCHAR(segun_un_periodo::DATE, 'YYYYMM')::INTEGER >= (SELECT DISTINCT month_id from {{ this }})
     {% endif %}
 
 )
